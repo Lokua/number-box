@@ -55,11 +55,16 @@ export default class NumberBox extends Component {
 
   onMouseMove = e => {
     const diff = this.state.prevY - e.clientY
+    const value = this.transformValue(
+      parseFloat(this.state.value) + diff * this.props.step
+    )
 
-    this.setState(state => ({
-      value: this.transformValue(this.state.value + diff * this.props.step),
-      prevY: e.clientY
-    }))
+    this.setState(
+      state => ({ value, prevY: e.clientY }),
+      () => {
+        this.props.onChange(this.state.value)
+      }
+    )
   }
 
   onMouseDown = e => {
