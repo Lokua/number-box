@@ -1,1 +1,3 @@
-export NumberBox from './NumberBox'
+import NumberBox from './NumberBox'
+
+export default NumberBox

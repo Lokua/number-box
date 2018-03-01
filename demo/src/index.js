@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 
-import { NumberBox } from '../../src'
+import NumberBox from '../../src'
 
 class Demo extends Component {
   state = {

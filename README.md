@@ -1,6 +1,7 @@
 # number-box
 
-[![Travis][build-badge]][build]
+<!-- [![Travis][build-badge]][build] -->
+
 [![npm package][npm-badge]][npm]
 
 <!-- [![npm][npm]][npm] -->

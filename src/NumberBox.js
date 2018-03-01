@@ -6,7 +6,7 @@ import { clamp, isNumeric, roundToDecimal } from './util'
 // prior art:
 // https://github.com/dataarts/dat.gui/blob/master/src/dat/controllers/NumberControllerBox.js
 // https://github.com/nexus-js/ui/blob/master/lib/interfaces/number.js
-export default class NumberBox extends Component {
+class NumberBox extends Component {
   static propTypes = {
     value: PropTypes.number,
     min: PropTypes.number,
@@ -94,3 +94,5 @@ export default class NumberBox extends Component {
     )
   }
 }
+
+export default NumberBox
