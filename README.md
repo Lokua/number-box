@@ -15,7 +15,7 @@ npm i @lokua/number-box --save
 
 ## Usage
 
-See [demo/src/index.js](demo-source) for a simple usage example
+See [demo/src/index.js][demo-source] for a simple usage example
 
 ## Notes
 
