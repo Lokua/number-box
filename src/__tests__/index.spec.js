@@ -82,6 +82,18 @@ describe('NumberBox', () => {
     })
   })
 
+  describe('isEnteringFloatingPoint', () => {
+    it('should return true when trailing dot', () => {
+      const wrapper = render({ decimals: 1 })
+      expect(wrapper.instance().isEnteringFloatingPoint('01.')).toBe(true)
+    })
+
+    it('should return false when decimals is 0', () => {
+      const wrapper = render()
+      expect(wrapper.instance().isEnteringFloatingPoint('01.')).toBe(false)
+    })
+  })
+
   describe('onMouseMove', () => {
     it('should set value according to previous/next clientY', () => {
       const wrapper = render({ value: 50 })

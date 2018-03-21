@@ -1,7 +1,6 @@
 # number-box
 
-React HTML5 input with draggable number value similar to MaxMSP GUI elements.
-Code almost 100% based on Dat GUI's [NumberBoxController](https://github.com/dataarts/dat.gui/blob/master/src/dat/controllers/NumberControllerBox.js)
+React HTML5 input with draggable number value.
 
 ## Install
 
@@ -53,6 +52,11 @@ implementation.
 
 NumberBbox does not ship with any styles in order to make
 customization as easy as possible.
+
+## Priot Art
+
+Most of the implementation is based on Dat GUI's [NumberControllerBox](https://github.com/dataarts/dat.gui/blob/master/src/dat/controllers/NumberControllerBox.js)
+and NexusUI's [Number](https://github.com/nexus-js/ui/blob/master/lib/interfaces/number.js)
 
 ## License
 

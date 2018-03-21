@@ -45,13 +45,19 @@ export default class NumberBox extends Component {
   }
 
   setValue(x) {
-    if (NumberBox.isNumeric(x)) {
+    if (NumberBox.isNumeric(x) && !this.isEnteringFloatingPoint(x)) {
       const value = this.transformValue(parseFloat(x))
 
       this.setState({ value }, () => {
         this.props.onChange(value)
       })
+    } else if (x === '') {
+      this.setState({ value: x })
     }
+  }
+
+  isEnteringFloatingPoint(value) {
+    return !!this.props.decimals && /^\d+\.$/.test(value)
   }
 
   transformValue(value) {
@@ -67,7 +73,6 @@ export default class NumberBox extends Component {
 
   onChange = e => {
     this.setValue(e.currentTarget.value)
-    this.safeCall('onChange', e)
   }
 
   onBlur = e => {
@@ -106,6 +111,8 @@ export default class NumberBox extends Component {
     } else if (e.key === 'ArrowDown') {
       this.setValue(this.state.value - this.props.step)
       e.preventDefault()
+    } else if (e.key === 'Enter') {
+      this.onBlur()
     }
 
     this.safeCall('onKeyDown', e)
