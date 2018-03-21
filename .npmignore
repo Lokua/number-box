@@ -1,0 +1,9 @@
+.eslintignore
+.eslintrc
+.prettierignore
+.travis.yml
+nwb.config.js
+jest.transform.js 
+__tests__
+*.spec.js
+demo

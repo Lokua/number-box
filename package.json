@@ -15,7 +15,8 @@
     "start": "nwb serve-react-demo",
     "test": "jest",
     "test:dev": "jest --watch",
-    "deploy": "gh-pages -d demo/dist"
+    "deploy": "gh-pages -d demo/dist",
+    "prepublish": "npm run build"
   },
   "jest": {
     "transform": {

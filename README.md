@@ -13,11 +13,47 @@ npm i @lokua/number-box --save
 
 See [demo](https://lokua.github.io/number-box) or view demo code at [demo/src/index.js][demo/src/index.js]
 
-## Notes
+## API / Props
 
-The `NumberBox` component does not ship with any styles in order to make
-customization as easy as possible. All additional properties
-are passed on to the native input element so inline styles, styled-components,
-glamorous, or className extensions will all work.
+NumberBox only renders a single `HTMLInputElement` and you can pass any props
+that `input[type=text]` allows in addition to `decimal: number`, which specifies
+the amount of decimal points a number should be rounded to (default is 1).
 
-[demo-source]: demo/src/index.js
+The only required prop is `onChange` which will be called with `value`.
+
+##### Defaults (not required)
+
+* `value = 0`
+* `min = 0`
+* `max = 127`
+* `step = 1`
+* `decimals = 0`
+
+##### Required
+
+* `onChange(value)`
+
+##### Additional Input Props
+
+Note that while you can supply any props to the underlying input,
+certain handlers cannot be overriden in order for `NumberBox` to work correctly.
+These include:
+
+* `onBlur`
+* `onMouseMove`
+* `onMouseDown`
+* `onMouseUp`
+* `onKeyDown`
+
+While they cannot be overridden you can still supply them in props,
+and they will be called _after_ NumberBox has done its thing with its own
+implementation.
+
+## Styles
+
+NumberBbox does not ship with any styles in order to make
+customization as easy as possible.
+
+## License
+
+MIT
