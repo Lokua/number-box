@@ -5,24 +5,48 @@ import NumberBox from '../../src'
 
 class Demo extends Component {
   state = {
-    value: 0
+    integer: 0,
+    float: 0
   }
 
   render() {
     return (
-      <div>
+      <div style={{ fontFamily: 'monospace' }}>
+        <h3>Default</h3>
+        <NumberBox
+          value={this.state.integer}
+          onChange={integer => {
+            this.setState({ integer })
+          }}
+        />
+        <h3>Float</h3>
         <NumberBox
           min={0}
           max={1}
           step={0.01}
           decimals={2}
-          value={this.state.value}
-          onChange={value => {
-            this.setState({ value })
+          value={this.state.float}
+          onChange={float => {
+            this.setState({ float })
           }}
         />
-        <br />
-        {this.state.value}
+        <h3>Inline Styles</h3>
+        <NumberBox
+          value={this.state.integer}
+          onChange={integer => {
+            this.setState({ integer })
+          }}
+          style={{
+            width: '4rem',
+            padding: '0.25rem 0.5rem',
+            border: '2px solid black',
+            borderRadius: '2px',
+            fontFamily: 'monospace',
+            fontWeight: 'bold',
+            fontSize: '1.24rem',
+            textAlign: 'center'
+          }}
+        />
       </div>
     )
   }

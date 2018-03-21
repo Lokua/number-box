@@ -3,7 +3,7 @@ module.exports = {
   npm: {
     esModules: true,
     umd: {
-      global: 'LUI',
+      global: 'NumberBox',
       externals: {
         react: 'React'
       }
