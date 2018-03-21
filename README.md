@@ -2,6 +2,8 @@
 
 React HTML5 input with draggable number value.
 
+**[demo](https://lokua.github.io/number-box)**
+
 ## Install
 
 ```
@@ -10,17 +12,25 @@ npm i @lokua/number-box --save
 
 ## Usage
 
-See [demo](https://lokua.github.io/number-box) or view demo code at [demo/src/index.js][demo/src/index.js]
+```js
+import NumberBox from '@lokua/number-box`
+// ...
+// default range of 0 - 127
+<NumberBox
+  value={this.state.value}
+  onChange={value => {
+    this.setState({ value })
+  }}
+/>
+```
 
 ## API / Props
 
 NumberBox only renders a single `HTMLInputElement` and you can pass any props
 that `input[type=text]` allows in addition to `decimal: number`, which specifies
-the amount of decimal points a number should be rounded to (default is 1).
+the amount of decimal points the value should be rounded to.
 
-The only required prop is `onChange` which will be called with `value`.
-
-##### Defaults (not required)
+### Defaults (not required)
 
 * `value = 0`
 * `min = 0`
@@ -28,11 +38,11 @@ The only required prop is `onChange` which will be called with `value`.
 * `step = 1`
 * `decimals = 0`
 
-##### Required
+### Required
 
 * `onChange(value)`
 
-##### Additional Input Props
+### Additional Input Props
 
 Note that while you can supply any props to the underlying input,
 certain handlers cannot be overriden in order for `NumberBox` to work correctly.
@@ -50,8 +60,9 @@ implementation.
 
 ## Styles
 
-NumberBbox does not ship with any styles in order to make
-customization as easy as possible.
+NumberBox does not ship with any styles in order to make
+customization as easy as possible. See the
+**[demo](https://lokua.github.io/number-box)** for some possible inspiration
 
 ## Priot Art
 
