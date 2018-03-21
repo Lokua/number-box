@@ -26,10 +26,6 @@ import NumberBox from '@lokua/number-box'
 
 ## API / Props
 
-NumberBox renders a single `HTMLInputElement` and you can pass any props
-that `input[type=text]` allows in addition to `decimal`, which specifies
-the amount of decimal places the value should be rounded to.
-
 ### Defaults (not required)
 
 * `value = 0`
@@ -44,9 +40,9 @@ the amount of decimal places the value should be rounded to.
 
 ### Additional Input Props
 
-You can supply any props to the underlying input, but
-certain handlers cannot be overriden in order for `NumberBox` to work correctly,
-including:
+NumberBox will pass virtually all props on to the underlying `HTMLInputElement`,
+however certain handlers cannot be overriden in order for `NumberBox` to work
+correctly, including:
 
 * `onBlur`
 * `onMouseMove`
