@@ -24,7 +24,7 @@ export default class NumberBox extends Component {
   }
 
   static isNumeric(value) {
-    return value !== '' && value != null && /^\d+\.?\d*$/.test(String(value))
+    return value !== '' && value != null && /^-?\d+\.?\d*$/.test(String(value))
   }
 
   static roundToDecimal(value, decimals) {
@@ -54,15 +54,15 @@ export default class NumberBox extends Component {
     }
   }
 
-  safeCall(key, ...args) {
-    typeof this.props[key] === 'function' && this.props[key](...args)
-  }
-
   transformValue(value) {
     return NumberBox.roundToDecimal(
       NumberBox.clamp(value, this.props.min, this.props.max),
       this.props.decimals
     )
+  }
+
+  safeCall(key, ...args) {
+    typeof this.props[key] === 'function' && this.props[key](...args)
   }
 
   onChange = e => {
