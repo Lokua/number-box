@@ -80,6 +80,13 @@ export default class NumberBox extends Component {
     this.safeCall('onBlur', e)
   }
 
+  onMouseDown = e => {
+    window.addEventListener('mousemove', this.onMouseMove)
+    window.addEventListener('mouseup', this.onMouseUp)
+    this.setState({ prevY: e.clientY })
+    this.safeCall('onMouseDown', e)
+  }
+
   onMouseMove = e => {
     const delta = this.state.prevY - e.clientY
     const value = parseFloat(this.state.value) + delta * this.props.step
@@ -91,17 +98,36 @@ export default class NumberBox extends Component {
     this.safeCall('onMouseMove', e)
   }
 
-  onMouseDown = e => {
-    window.addEventListener('mousemove', this.onMouseMove)
-    window.addEventListener('mouseup', this.onMouseUp)
-    this.setState({ prevY: e.clientY })
-    this.safeCall('onMouseDown', e)
-  }
-
   onMouseUp = e => {
     window.removeEventListener('mousemove', this.onMouseMove)
     window.removeEventListener('mouseup', this.onMouseUp)
     this.safeCall('onMouseUp', e)
+  }
+
+  onTouchStart = e => {
+    const [touch] = e.touches
+    window.addEventListener('touchmove', this.onTouchMove)
+    window.addEventListener('touchend', this.onTouchEnd)
+    this.setState({ prevY: touch.clientY })
+    this.safeCall('onTouchStart', e)
+  }
+
+  onTouchMove = e => {
+    const [touch] = e.touches
+    const delta = this.state.prevY - touch.clientY
+    const value = parseFloat(this.state.value) + delta * this.props.step
+
+    this.setState({ prevY: touch.clientY }, () => {
+      this.setValue(value)
+    })
+
+    this.safeCall('onTouchMove', e)
+  }
+
+  onTouchEnd = e => {
+    window.removeEventListener('touchmove', this.onMouseMove)
+    window.removeEventListener('touchend', this.onMouseUp)
+    this.safeCall('onTouchEnd', e)
   }
 
   onKeyDown = e => {
@@ -129,6 +155,8 @@ export default class NumberBox extends Component {
       onBlur,
       onMouseDown,
       onMouseUp,
+      onTouchStart,
+      onTouchEnd,
       onKeyDown,
       ...rest
     } = this.props
@@ -142,6 +170,8 @@ export default class NumberBox extends Component {
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         onKeyDown={this.onKeyDown}
+        onTouchStart={this.onTouchStart}
+        onTouchEnd={this.onTouchEnd}
         {...rest}
       />
     )

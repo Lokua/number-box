@@ -104,6 +104,16 @@ describe('NumberBox', () => {
     })
   })
 
+  describe('onTouchMove', () => {
+    it('should set value according to previous/next clientY', () => {
+      const wrapper = render({ value: 50 })
+      wrapper.setState({ prevY: 100 })
+      wrapper.instance().onTouchMove({ touches: [{ clientY: 90 }] })
+      expect(wrapper.state('value')).toEqual(60)
+      expect(props.onChange).toHaveBeenCalledWith(60)
+    })
+  })
+
   describe('onKeyDown', () => {
     it('should increment value', () => {
       render()
