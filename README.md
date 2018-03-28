@@ -45,9 +45,10 @@ however certain handlers cannot be overriden in order for `NumberBox` to work
 correctly, including:
 
 * `onBlur`
-* `onMouseMove`
 * `onMouseDown`
 * `onMouseUp`
+* `onTouchStart`
+* `onTouchEnd`
 * `onKeyDown`
 
 You can still supply them in props, however,
