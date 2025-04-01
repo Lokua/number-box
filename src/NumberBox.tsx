@@ -5,7 +5,7 @@ type Props = {
   min?: number
   max?: number
   step?: number
-  sensitivity?: [number, number]
+  sensitivity?: number
   onChange: (value: number) => void
 }
 
@@ -17,12 +17,19 @@ function numberOfDecimals(step: number) {
   return 0
 }
 
+/**
+ * NumberBox component that allows dragging to change values
+ *
+ * - Normal mode (no shift): The entire range (min to max) is mapped to the
+ *   screen height
+ * - Shift mode: Values change exactly by the step amount for finer control
+ */
 export default function NumberBox({
   value,
   min = 0,
   max = 100,
   step = 1,
-  sensitivity = [200, 500],
+  sensitivity = 200,
   onChange,
   ...rest
 }: Props) {
@@ -31,6 +38,10 @@ export default function NumberBox({
   const prevY = useRef(0)
   const [shiftHeld, setShiftHeld] = useState(false)
   const precision = numberOfDecimals(step)
+
+  useEffect(() => {
+    internalValue.current = value
+  }, [value])
 
   useEffect(() => {
     function onKeydown(e: KeyboardEvent) {
@@ -50,23 +61,39 @@ export default function NumberBox({
 
     return () => {
       window.removeEventListener('keydown', onKeydown)
-      window.removeEventListener('keydown', onKeyup)
+      window.removeEventListener('keyup', onKeyup)
     }
   }, [])
 
   function applyDelta(clientY: number) {
-    const delta = prevY.current - clientY
-    const rangeDivisor = shiftHeld ? sensitivity[1] : sensitivity[0]
-    const dragSensitivity = (max - min) / rangeDivisor
-    const rawValue = internalValue.current + delta * dragSensitivity
-    const quantizedValue = Math.round(rawValue / step) * step
-    prevY.current = clientY
-    setInternalValue(quantizedValue)
-    onChange(quantizedValue)
-  }
+    const pixelDelta = prevY.current - clientY
 
-  function setInternalValue(x: number) {
-    internalValue.current = x < min ? min : x > max ? max : x
+    let newValue: number
+
+    if (shiftHeld) {
+      const direction = pixelDelta > 0 ? 1 : pixelDelta < 0 ? -1 : 0
+      newValue =
+        direction !== 0
+          ? internalValue.current + step * direction
+          : internalValue.current
+    } else {
+      const valuePerPixel = (max - min) / sensitivity
+      const rawChange = pixelDelta * valuePerPixel
+      newValue = internalValue.current + rawChange
+    }
+
+    const boundedValue = Math.min(max, Math.max(min, newValue))
+
+    const finalValue = shiftHeld
+      ? boundedValue
+      : Math.round((boundedValue - min) / step) * step + min
+
+    if (finalValue !== internalValue.current) {
+      internalValue.current = finalValue
+      onChange(finalValue)
+    }
+
+    prevY.current = clientY
   }
 
   function onMouseDown(e: React.MouseEvent) {
@@ -82,22 +109,32 @@ export default function NumberBox({
   function onMouseUp() {
     window.removeEventListener('mousemove', onMouseMove)
     window.removeEventListener('mouseup', onMouseUp)
-    console.log('onMouseUp:', inputRef)
   }
 
   function onTouchStart(e: React.TouchEvent) {
-    window.addEventListener('touchmove', onTouchMove)
+    window.addEventListener('touchmove', onTouchMove as EventListener)
     window.addEventListener('touchend', onTouchEnd)
     prevY.current = e.touches[0].clientY
   }
 
-  function onTouchMove(e: React.TouchEvent | TouchEvent) {
+  function onTouchMove(e: TouchEvent) {
     applyDelta(e.touches[0].clientY)
   }
 
   function onTouchEnd() {
-    window.removeEventListener('touchmove', onTouchMove)
+    window.removeEventListener('touchmove', onTouchMove as EventListener)
     window.removeEventListener('touchend', onTouchEnd)
+  }
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValue = parseFloat(e.target.value)
+    if (!isNaN(newValue)) {
+      const stepsFromMin = Math.round((newValue - min) / step)
+      const steppedValue = min + stepsFromMin * step
+      const boundedValue = Math.min(max, Math.max(min, steppedValue))
+      internalValue.current = boundedValue
+      onChange(boundedValue)
+    }
   }
 
   return (
@@ -109,10 +146,7 @@ export default function NumberBox({
       value={internalValue.current.toFixed(precision)}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onChange={(e) => {
-        setInternalValue(e.currentTarget.valueAsNumber)
-      }}
+      onChange={handleInputChange}
       {...rest}
     />
   )
