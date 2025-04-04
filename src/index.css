@@ -5,3 +5,7 @@
   width: 100vw;
   height: 100vh;
 }
+
+input[type='text'] {
+  margin-right: 6px;
+}
