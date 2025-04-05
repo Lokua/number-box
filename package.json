@@ -5,10 +5,10 @@
   "homepage": "https://lokua.github.io/number-box",
   "type": "module",
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/NumberBox.js"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./lib/NumberBox.js",
+  "types": "./lib/NumberBox.d.ts",
   "files": [
     "lib"
   ],
