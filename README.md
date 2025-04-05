@@ -1,12 +1,6 @@
 # number-box
 
-A React component offering a draggable number input, similar to what you'd find
-in software like Ableton Live or MaxMSP. It is purposely left completely
-unstyled.
-
-# number-box
-
-React HTML5 input with draggable number value.
+React text input with draggable number value.
 
 **[demo](https://lokua.github.io/number-box)**
 
