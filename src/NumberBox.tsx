@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 type Override<T, U> = Omit<T, keyof U> & U
 
-type Props = Override<
+export type Props = Override<
   React.InputHTMLAttributes<HTMLInputElement>,
   {
     value: number
@@ -10,7 +10,6 @@ type Props = Override<
     min?: number
     max?: number
     step?: number
-    /** The amount of pixels it takes while dragging to cover the entire range */
     pixelRange?: number
   }
 >
@@ -36,7 +35,7 @@ export default function NumberBox({
   const internalValue = useRef(value)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const prevY = useRef(0)
-  const [shiftHeld, setShiftHeld] = useState(false)
+  const shiftHeld = useRef(false)
   const [inputValue, setInputValue] = useState(value.toFixed(precision))
   const [editing, setEditing] = useState(false)
   const accumulatedDelta = useRef(0)
@@ -49,13 +48,13 @@ export default function NumberBox({
   useEffect(() => {
     function onKeydown(e: KeyboardEvent) {
       if (e.key === 'Shift') {
-        setShiftHeld(true)
+        shiftHeld.current = true
       }
     }
 
     function onKeyup(e: KeyboardEvent) {
       if (e.key === 'Shift') {
-        setShiftHeld(false)
+        shiftHeld.current = false
       }
     }
 
@@ -78,7 +77,7 @@ export default function NumberBox({
 
     let stepsMoved = accumulatedDelta.current / pixelsPerStep
 
-    if (shiftHeld) {
+    if (shiftHeld.current) {
       stepsMoved = Math.trunc(delta)
     } else {
       stepsMoved = Math.round(stepsMoved)
@@ -167,7 +166,6 @@ export default function NumberBox({
 
   return (
     <input
-      {...rest}
       type="text"
       ref={(element) => {
         inputRef.current = element
@@ -182,6 +180,7 @@ export default function NumberBox({
       style={{
         cursor: editing ? 'text' : 'ns-resize',
       }}
+      {...rest}
     />
   )
 }

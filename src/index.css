@@ -6,6 +6,17 @@
   height: 100vh;
 }
 
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 6px;
+}
+
+label {
+  margin-bottom: 4px;
+}
+
 input[type='text'] {
   margin-right: 6px;
 }

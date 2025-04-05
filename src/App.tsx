@@ -9,10 +9,22 @@ export default function App() {
 
   return (
     <div>
-      <NumberBox value={v1} onChange={setV1} />
-      <NumberBox value={v2} min={0} max={1} step={0.001} onChange={setV2} />
-      <NumberBox value={v3} min={0} max={100} step={10} onChange={setV3} />
-      <NumberBox value={v4} min={0} max={10_000} step={1} onChange={setV4} />
+      <fieldset>
+        <label>range = [0, 100], step = 1</label>
+        <NumberBox value={v1} onChange={setV1} />
+      </fieldset>
+      <fieldset>
+        <label>range = [0, 1], step = 0.001</label>
+        <NumberBox value={v2} min={0} max={1} step={0.001} onChange={setV2} />
+      </fieldset>
+      <fieldset>
+        <label>range = [0, 100], step = 10</label>
+        <NumberBox value={v3} min={0} max={100} step={10} onChange={setV3} />
+      </fieldset>
+      <fieldset>
+        <label>range = [0, 10_000], step = 1</label>
+        <NumberBox value={v4} min={0} max={10_000} step={1} onChange={setV4} />
+      </fieldset>
     </div>
   )
 }
