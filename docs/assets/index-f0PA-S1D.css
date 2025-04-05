@@ -1,0 +1,1 @@
+*,*:before,*:after{box-sizing:border-box}body{margin:0;padding:0}#root{display:flex;justify-content:center;align-items:center;width:100vw;height:100vh}fieldset{display:flex;flex-direction:column;border:none;margin-bottom:6px}label{margin-bottom:4px}input[type=text]{width:fit-content;margin-right:6px}

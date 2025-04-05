@@ -14,8 +14,9 @@
   ],
   "scripts": {
     "start": "vite --port 3000",
-    "build": "tsc",
-    "build:demo": "tsc -b ./tsconfig.demo.json && vite build --outDir docs --base /number-box/",
+    "build": "bun run build:lib && bun run build:demo",
+    "build:lib": "tsc -b ./tsconfig.lib.json",
+    "build:demo": "tsc -b ./tsconfig.json && vite build --outDir docs --base /number-box/",
     "lint": "eslint ."
   },
   "peerDependencies": {

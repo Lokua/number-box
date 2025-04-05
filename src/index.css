@@ -1,3 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   display: flex;
   justify-content: center;
@@ -18,5 +29,6 @@ label {
 }
 
 input[type='text'] {
+  width: fit-content;
   margin-right: 6px;
 }
