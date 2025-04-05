@@ -14,7 +14,7 @@
   "scripts": {
     "start": "vite --port 3000",
     "build": "tsc",
-    "build:demo": "tsc -b ./tsconfig.demo.json && vite build",
+    "build:demo": "tsc -b ./tsconfig.demo.json && vite build --outDir docs",
     "lint": "eslint ."
   },
   "peerDependencies": {
