@@ -1,6 +1,6 @@
 {
   "name": "@lokua/number-box",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "React text input with draggable number value similar to MaxMSP GUI elements",
   "homepage": "https://lokua.github.io/number-box",
   "type": "module",
