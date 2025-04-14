@@ -155,7 +155,11 @@ export default function NumberBox({
 
   function onDoubleClick() {
     setEditing(true)
-    inputRef.current?.focus()
+
+    if (inputRef.current) {
+      inputRef.current.focus()
+      inputRef.current.setSelectionRange(0, inputRef.current.value.length)
+    }
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {

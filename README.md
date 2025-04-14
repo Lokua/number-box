@@ -36,9 +36,7 @@ const numberBox = (
 ### Manual Input
 
 To edit the value manually you need to double click the input which will
-automatically put the input in focus and allow typing as implementation-wise
-having to guess if a single click is to enter a value or begin dragging is a bit
-tricky.
+automatically put the input in focus, select the text content, and allow typing.
 
 ### Step Precision
 
@@ -47,8 +45,8 @@ quantized or "snapped" to, otherwise if we strictly only allowed moving by
 `step`, then for example a range of 100_000 and a step of 1 would take about 53
 average computer screen's worth of dragging to get from min to max - not a great
 user experience! Fortunately for precision - besides typing into the input
-manually - you can hold shift while dragging to force moving exactly by `step`
-increments.
+manually - you can hold shift while dragging to make fine adjustments that
+exactly `step` increments.
 
 ## Styles
 
