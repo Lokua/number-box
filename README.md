@@ -45,7 +45,7 @@ quantized or "snapped" to, otherwise if we strictly only allowed moving by
 `step`, then for example a range of 100_000 and a step of 1 would take about 53
 average computer screen's worth of dragging to get from min to max - not a great
 user experience! Fortunately for precision - besides typing into the input
-manually - you can hold shift while dragging to make fine adjustments that
+manually - you can hold shift while dragging to make fine adjustments that are
 exactly `step` increments.
 
 ## Styles
